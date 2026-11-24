@@ -1,0 +1,50 @@
+/*
+ * Code Hackademy design tokens (Tailwind CSS v4).
+ * Import from an app's globals.css AFTER `@import "tailwindcss";`:
+ *   @import "../shared/src/design/tokens.css";
+ *   @source "../shared/src";
+ * Brand orange is sampled from the official logo (#FD5000).
+ */
+@theme {
+  --color-orange: #fd5000;
+  --color-orange-deep: #c23c00;   /* orange text on light backgrounds: 5.4:1 on paper */
+  --color-orange-soft: #fff0e8;   /* tinted surfaces */
+  --color-ink: #0a1114;           /* the logo's near-black */
+  --color-charcoal: #1b2428;
+  --color-steel: #566269;         /* secondary text: 6:1 on paper */
+  --color-line: #d9d6cf;
+  --color-paper: #f7f5f0;         /* warm off-white page background */
+  --color-white: #ffffff;
+
+  /* Status colours (text on their -soft backgrounds passes AA) */
+  --color-success: #12703a;   --color-success-soft: #e6f4ec;
+  --color-warning: #8a5a00;   --color-warning-soft: #fff4d6;
+  --color-danger: #b42318;    --color-danger-soft: #fdecea;
+  --color-info: #1d4f91;      --color-info-soft: #e8f0fb;
+
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-display: var(--font-archivo), "Arial Narrow", Arial, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --radius-ui: 0.625rem;      /* controls */
+  --radius-card: 0.875rem;    /* cards and panels */
+  --shadow-card: 0 1px 2px rgb(10 17 20 / 0.06);
+  --shadow-hard: 5px 5px 0 var(--color-ink); /* public-site signature: use sparingly */
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); overflow-x: clip; }
+  ::selection { background: var(--color-orange); color: var(--color-ink); }
+  :focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; box-shadow: 0 0 0 5px var(--color-orange); border-radius: 4px; }
+  .on-dark :focus-visible { outline-color: var(--color-white); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+}
+
+/* Per-app density: same brand, different personality */
+[data-app="student"] { --radius-ui: 0.75rem; --radius-card: 1rem; }
+[data-app="admin"] { --radius-ui: 0.5rem; --radius-card: 0.75rem; }
+
+.display { font-family: var(--font-display); font-weight: 900; font-variation-settings: "wdth" 112; letter-spacing: -0.02em; line-height: 0.95; text-wrap: balance; }
